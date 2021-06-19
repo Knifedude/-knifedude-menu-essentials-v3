@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="knifedude-menu-essentials-v3" />
+        <module name="plugin" />
+        <module name="common" />
+        <module name="core" />
+        <module name="api" />
       </profile>
     </annotationProcessing>
   </component>
