@@ -6,14 +6,20 @@ import java.util.UUID;
 
 public class MenuComponent implements Identifiable {
 
-    private UUID componentUUID = UUID.randomUUID();
+    private final UUID componentUUID = UUID.randomUUID();
 
     public MenuComponent() {
     }
 
-    public UUID getUniqueId() {
+    /**
+     * Gets the unique component id. The id is unique for each instance
+     * @return
+     */
+    public final UUID getUniqueId() {
         return componentUUID;
     }
+
+
 }
 
 
