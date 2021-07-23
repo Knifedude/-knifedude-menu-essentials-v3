@@ -13,6 +13,5 @@ public class MenuTemplate {
 
     int height() { return height; };
 
-    Menu create();
 
 }
