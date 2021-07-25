@@ -1,11 +1,12 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.models;
 
 import com.knifedude.menuessentials.api.collection.TagCollection;
 import com.knifedude.menuessentials.api.common.models.Identifiable;
+import com.knifedude.menuessentials.api.common.models.Taggable;
 
 import java.util.UUID;
 
-public class MenuComponent implements Identifiable {
+public class MenuComponent implements Identifiable, Taggable {
 
     private final UUID componentUUID = UUID.randomUUID();
     private final TagCollection tags;

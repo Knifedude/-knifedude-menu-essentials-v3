@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.models;
 
 public enum ClickType {
     LEFT_CLICK,

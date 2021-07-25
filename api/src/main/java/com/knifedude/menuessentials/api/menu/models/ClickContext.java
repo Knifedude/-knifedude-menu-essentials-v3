@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.models;
 
 import com.knifedude.menuessentials.api.player.models.Player;
 

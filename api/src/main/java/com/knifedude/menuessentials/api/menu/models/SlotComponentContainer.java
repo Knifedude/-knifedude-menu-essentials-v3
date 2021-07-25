@@ -1,9 +1,7 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.models;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SlotComponentContainer extends MenuComponent {

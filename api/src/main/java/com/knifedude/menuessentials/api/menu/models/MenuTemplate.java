@@ -1,8 +1,9 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.models;
 
 public class MenuTemplate {
 
     private final int width, height;
+
 
     public MenuTemplate(int width, int height) {
         this.width = width;

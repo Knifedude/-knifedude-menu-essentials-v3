@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class TagCollection {
 
@@ -37,6 +38,10 @@ public class TagCollection {
         return tags.contains(tag);
     }
 
+    public boolean has(Predicate<String> criteria) {
+        return tags.stream().anyMatch(criteria);
+    }
+
     public boolean hasAll(String... tags) {
         for (String tag : tags) {
             if (!has(tag)) {
@@ -57,6 +62,10 @@ public class TagCollection {
 
     public void remove(String tag) {
         this.tags.remove(tag);
+    }
+
+    public  void remove(Predicate<String> criteria) {
+        this.tags.removeIf(criteria);
     }
 
     public void removeAll(String... tags) {
