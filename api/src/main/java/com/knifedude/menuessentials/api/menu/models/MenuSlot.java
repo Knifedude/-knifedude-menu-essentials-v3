@@ -28,6 +28,7 @@ public final class MenuSlot implements Taggable {
     }
 
     public void setComponent(SlotComponent newComponent) {
+
         // case-1: The slot is empty
         if (this.component == null) {
             this.component = newComponent;
@@ -36,37 +37,24 @@ public final class MenuSlot implements Taggable {
 
         // case-2: The incoming component is null
         } else if (newComponent == null) {
-            this.component.detach();
+            clear();
 
         // case-3: The slot already has this exact component -> UPDATE
         } else if (this.component.matchesId(newComponent)) {
-            this.component = newComponent;
             this.render(newComponent);
+
+        // case-4: Replace existing component
         } else {
-            clear();
-
-        }
-
-
-        if (this.component != null && newComponent != null && newComponent.getUniqueId().equals(this.component.getUniqueId())) {
-            update(newComponent);
-        } else {
-
-            // 2) If we already have an component: detach!
             clear();
             this.component = newComponent;
-
-            // 3) If the new component is not null. Attach and update
-            if (this.component != null) {
-                update(newComponent);
-                this.component.attach(this);
-            }
+            component.attach(this);
+            this.render(component);
         }
     }
 
     private void render(SlotComponent component) {
         if (component.isVisible()) {
-            this.inventorySlot.setItemStack(component.get());
+            this.inventorySlot.setItemStack(component.getDisplayItem());
         } else {
             this.inventorySlot.clear();
         }
@@ -80,8 +68,5 @@ public final class MenuSlot implements Taggable {
             old.detach();
         }
     }
-
-
-
 
 }

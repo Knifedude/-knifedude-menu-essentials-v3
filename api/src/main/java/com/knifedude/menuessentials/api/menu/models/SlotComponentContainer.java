@@ -2,6 +2,7 @@ package com.knifedude.menuessentials.api.menu.models;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SlotComponentContainer extends MenuComponent {
@@ -14,6 +15,14 @@ public class SlotComponentContainer extends MenuComponent {
         this.componentsBySlotIndex = new HashMap<>();
         this.width = width;
         this.height = height;
+    }
+
+    void attach() {
+
+    }
+
+    void detach() {
+
     }
 
     public int height() {
@@ -60,8 +69,19 @@ public class SlotComponentContainer extends MenuComponent {
     }
 
     public void removeComponent(Predicate<MenuComponent> criteria) {
-        componentsByUUID.entrySet().removeIf(e -> criteria.test(e.getValue()));
-        componentsBySlotIndex.entrySet().removeIf(e -> criteria.test(e.getValue()));
+        Map<UUID,MenuComponent> components = componentsByUUID.entrySet()
+                        .stream()
+                        .filter(entry -> criteria.test(entry.getValue()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        if (components.isEmpty()) return;
+
+        components.forEach();
+
+    }
+
+    public void removeMenuComponent(UUID componentId) {
+
     }
 
 
