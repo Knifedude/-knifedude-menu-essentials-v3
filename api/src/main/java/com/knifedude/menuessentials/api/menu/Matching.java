@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu.models;
+package com.knifedude.menuessentials.api.menu;
 
 import com.knifedude.menuessentials.api.common.models.Taggable;
 

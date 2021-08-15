@@ -1,9 +1,8 @@
-package com.knifedude.menuessentials.api.menu.models;
+package com.knifedude.menuessentials.api.menu;
 
 import com.knifedude.menuessentials.api.collection.TagCollection;
 import com.knifedude.menuessentials.api.common.models.Taggable;
 import com.knifedude.menuessentials.api.inventory.model.InventorySlot;
-import com.knifedude.menuessentials.api.item.models.ItemStack;
 
 public final class MenuSlot implements Taggable {
 
@@ -11,7 +10,8 @@ public final class MenuSlot implements Taggable {
     private TagCollection tags;
     private InventorySlot inventorySlot;
 
-    MenuSlot() {
+    public MenuSlot(InventorySlot inventorySlot) {
+        this.inventorySlot = inventorySlot;
         this.tags = new TagCollection();
     }
 

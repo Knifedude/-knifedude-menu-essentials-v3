@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu.models;
+package com.knifedude.menuessentials.api.menu;
 
 import java.util.List;
 import java.util.Optional;

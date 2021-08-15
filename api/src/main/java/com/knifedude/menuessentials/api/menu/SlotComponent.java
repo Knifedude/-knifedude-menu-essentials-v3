@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu.models;
+package com.knifedude.menuessentials.api.menu;
 
 import com.knifedude.menuessentials.api.common.validation.Assert;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
@@ -51,7 +51,7 @@ public class SlotComponent extends MenuComponent {
         return !isHidden;
     }
 
-    ItemStack getDisplayItem() {
+    public ItemStack getDisplayItem() {
         return displayItem.copy();
     }
 
@@ -101,7 +101,7 @@ public class SlotComponent extends MenuComponent {
         update();
     }
 
-    Optional<MenuSlot> slot() {
+    public Optional<MenuSlot> slot() {
         return Optional.ofNullable(menuSlot);
     }
 
@@ -114,9 +114,9 @@ public class SlotComponent extends MenuComponent {
 
     void detach() {
         if (menuSlot != null) {
-            MenuSlot temp = menuSlot;
+            MenuSlot tempSlot = menuSlot;
             this.menuSlot = null;
-            temp.clear();
+            tempSlot.clear();
         }
     }
 
