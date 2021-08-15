@@ -17,6 +17,8 @@ public class SlotComponent extends MenuComponent {
     private boolean isHidden;
 
     public SlotComponent(ItemStack displayItem) {
+        Assert.notNull(displayItem, "displayItem");
+
         this.displayItem = displayItem.copy();
     }
 
