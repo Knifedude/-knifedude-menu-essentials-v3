@@ -1,4 +1,6 @@
-package com.knifedude.menuessentials.api.menu;
+package com.knifedude.menuessentials.api.menu.slot;
+
+import com.knifedude.menuessentials.api.menu.Matching;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,56 +9,56 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MenuSlotStream {
+public class SlotStream {
 
-    public Stream<MenuSlot> slotStream;
+    public Stream<Slot> slotStream;
 
-    public MenuSlotStream(Stream<MenuSlot> slotStream) {
+    public SlotStream(Stream<Slot> slotStream) {
         this.slotStream = slotStream;
     }
 
-    public Stream<MenuSlot> raw() {
+    public Stream<Slot> raw() {
         return slotStream;
     }
 
-    public MenuSlotStream hasComponent() {
-        this.slotStream = slotStream.filter(MenuSlot::hasComponent);
+    public SlotStream hasComponent() {
+        this.slotStream = slotStream.filter(Slot::hasComponent);
         return this;
     }
 
-    public MenuSlotStream isEmpty() {
-        this.slotStream = slotStream.filter(MenuSlot::isEmpty);
+    public SlotStream isEmpty() {
+        this.slotStream = slotStream.filter(Slot::isEmpty);
         return this;
     }
 
-    public MenuSlotStream matching(Predicate<MenuSlot> criteria) {
+    public SlotStream matching(Predicate<Slot> criteria) {
         this.slotStream = slotStream.filter(criteria);
         return this;
     }
 
-    public MenuSlotStream matchingAllTags(String... tags) {
+    public SlotStream matchingAllTags(String... tags) {
         this.slotStream = slotStream.filter(Matching.allTags(tags));
         return this;
     }
 
-    public MenuSlotStream matchingAnyTags(String... tags) {
+    public SlotStream matchingAnyTags(String... tags) {
         this.slotStream = slotStream.filter(Matching.anyTags(tags));
         return this;
     }
 
-    public Optional<MenuSlot> collectFirst() {
+    public Optional<Slot> collectFirst() {
         return slotStream.findFirst();
     }
 
-    public Optional<MenuSlot> collectAny() {
+    public Optional<Slot> collectAny() {
         return slotStream.findAny();
     }
 
-    public List<MenuSlot> collectList() {
+    public List<Slot> collectList() {
         return slotStream.collect(Collectors.toList());
     }
 
-    public void forEach(Consumer<MenuSlot> csr) {
+    public void forEach(Consumer<Slot> csr) {
         slotStream.forEach(csr);
     }
 
