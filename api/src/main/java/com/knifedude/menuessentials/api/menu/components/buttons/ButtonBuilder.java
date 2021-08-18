@@ -5,7 +5,7 @@ import com.knifedude.menuessentials.api.item.models.ItemType;
 import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
 
-public interface ButtonOptionsBuilder<TInstance extends ButtonOptions, TBuilder extends ButtonOptionsBuilder<TInstance,TBuilder>> {
+public interface ButtonBuilder<TInstance extends Button, TBuilder extends ButtonBuilder<TInstance,TBuilder>> {
 
     TBuilder withDisplayItem(ItemStack itemStack);
 
@@ -13,7 +13,7 @@ public interface ButtonOptionsBuilder<TInstance extends ButtonOptions, TBuilder 
 
     TBuilder withDisplayName(Text text);
 
-    TBuilder withOnClick(ClickHandler clickHandler);
+    TBuilder withOnClick(ClickHandler... clickHandler);
 
     TInstance build();
 
