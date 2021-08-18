@@ -13,6 +13,7 @@ public class ClickContext {
     private final Slot slot;
     private final ClickType clickType;
     private final MenuView view;
+    private boolean aborted;
 
     ClickContext(Slot slot, MenuView view, Player player, ClickType clickType) {
         this.slot = slot;
@@ -37,6 +38,11 @@ public class ClickContext {
         return clickType;
     }
 
+    public void abort() {
+        this.aborted = true;
+    }
 
-
+    public boolean isAborted() {
+        return aborted;
+    }
 }
