@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu.components;
+package com.knifedude.menuessentials.api.menu;
 
 import com.knifedude.menuessentials.api.menu.components.buttons.Button;
 import com.knifedude.menuessentials.api.menu.components.buttons.ButtonOptions;
