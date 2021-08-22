@@ -1,5 +1,7 @@
 package com.knifedude.menuessentials.api.menu;
 
+import com.knifedude.menuessentials.api.player.models.Player;
+
 public class Menu {
 
     private MenuViewFactory viewFactory;
@@ -8,8 +10,9 @@ public class Menu {
         this.viewFactory = viewFactory;
     }
 
-    public MenuView createView() {
 
+    public MenuView createView(Player player) {
+        return this.viewFactory.create(player);
     }
 
 }

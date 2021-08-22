@@ -13,7 +13,7 @@ public interface PageSource<TElement> {
      * @throws NoSuchElementException If the page does not exist
      * @return The items that would be on the given page index
      */
-    Collection<TElement> getPage(int pageIndex) throws NoSuchElementException;
+    Collection<TElement> getPage(int pageIndex, int pageSize) throws NoSuchElementException;
 
     /**
      * Determines whether a page on a given index exists
@@ -22,8 +22,8 @@ public interface PageSource<TElement> {
      */
     boolean hasPage(int pageIndex);
 
-    static <TElement> PageSource<TElement> from(Collection<TElement> elements, int pageSize) {
-        return Register.getFactory(PageSourceFactory.class).create(elements, pageSize);
+    static <TElement> PageSource<TElement> from(Collection<TElement> elements) {
+        return Register.getFactory(PageSourceFactory.class).create(elements);
     }
 
 }

@@ -2,6 +2,7 @@ package com.knifedude.menuessentials.api.menu.slot;
 
 import com.knifedude.menuessentials.api.menu.Matching;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;

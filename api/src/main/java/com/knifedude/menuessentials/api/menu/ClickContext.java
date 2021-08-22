@@ -3,6 +3,7 @@ package com.knifedude.menuessentials.api.menu;
 import com.knifedude.menuessentials.api.inventory.model.InventoryTransactionResult;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.menu.slot.Slot;
+import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.player.models.Player;
 
 import java.util.Optional;
@@ -25,6 +26,8 @@ public class ClickContext {
     public Slot getSlot() {
         return slot;
     }
+
+
 
     public MenuView getView() {
         return view;

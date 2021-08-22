@@ -1,6 +1,7 @@
 package com.knifedude.menuessentials.api.player.models;
 
 import com.knifedude.menuessentials.api.common.models.Identifiable;
+import com.knifedude.menuessentials.api.inventory.model.Inventory;
 import com.knifedude.menuessentials.api.inventory.model.InventoryTransactionResult;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 
@@ -26,6 +27,8 @@ public interface Player extends Identifiable {
      * Closes the current inventory that is opened by this player
      */
     void closeInventory();
+
+    void openInventory(Inventory inventory);
 
     InventoryTransactionResult giveItemStack(ItemStack itemStack);
 

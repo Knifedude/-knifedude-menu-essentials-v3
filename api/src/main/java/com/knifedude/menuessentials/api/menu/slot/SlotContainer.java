@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SlotContainer {
+public class SlotContainer implements Iterable<Slot> {
 
     private final Map<Integer, Slot> slots;
     private final int width, height;
@@ -96,9 +96,36 @@ public class SlotContainer {
         return IntStream.range(fromRowIndex, toRowIndex).mapToObj(this::getSingleRow).collect(Collectors.toList());
     }
 
+    @Override
+    public Iterator<Slot> iterator() {
+        return new SlotSourceIterator(slotSource);
+    }
+
+    private static class SlotSourceIterator implements Iterator<Slot> {
+
+        private final SlotSource slotSource;
+        private int count = -1;
+
+        public SlotSourceIterator(SlotSource slotSource) {
+            this.slotSource = slotSource;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return slotSource.hasSlot(count + 1);
+        }
+
+        @Override
+        public Slot next() {
+            return slotSource.getSlot(++count);
+        }
+    }
+
     private interface SlotSource {
 
         Slot getSlot(int index);
+
+        boolean hasSlot(int index);
 
     }
 
@@ -114,6 +141,12 @@ public class SlotContainer {
         public Slot getSlot(int index) {
             return new Slot(inventory.getSlot(index));
         }
+
+        @Override
+        public boolean hasSlot(int index) {
+            return inventory.findSlot(index).isPresent();
+        }
+
     }
 
     private static class ListSlotSource implements SlotSource {
@@ -127,6 +160,11 @@ public class SlotContainer {
         @Override
         public Slot getSlot(int index) {
             return slots.get(index);
+        }
+
+        @Override
+        public boolean hasSlot(int index) {
+            return index >= 0 && index < slots.size();
         }
     }
 

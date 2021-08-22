@@ -4,6 +4,8 @@ import com.knifedude.menuessentials.api.collection.TagCollection;
 import com.knifedude.menuessentials.api.common.models.Taggable;
 import com.knifedude.menuessentials.api.inventory.model.InventorySlot;
 
+import java.util.Optional;
+
 public final class Slot implements Taggable {
 
     private SlotComponent component;
@@ -25,6 +27,10 @@ public final class Slot implements Taggable {
 
     public boolean hasComponent() {
         return component != null;
+    }
+
+    public Optional<SlotComponent> getComponent() {
+        return Optional.ofNullable(component);
     }
 
     public boolean isEmpty() {
