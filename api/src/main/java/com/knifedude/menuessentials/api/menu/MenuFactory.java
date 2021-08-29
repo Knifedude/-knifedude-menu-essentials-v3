@@ -16,7 +16,7 @@ public final class MenuFactory {
 
     public Menu createFrom(MenuWidth width, MenuHeight height, Consumer<MenuView> init) {
         MenuViewFactory menuViewFactory = new MenuViewFactory(init, () -> inventoryFactory.create(width.getValue(),height.getValue()));
-        return new Menu(menuViewFactory);
+        return new Menu(menuViewFactory, viewRegister);
     }
 
     public Menu createFrom(MenuTemplate template) {

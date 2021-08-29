@@ -1,10 +1,11 @@
-package com.knifedude.menuessentials.api.menu.components.containers;
+package com.knifedude.menuessentials.api.menu.components.containers.horizontalbar;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.menu.ClickContext;
 import com.knifedude.menuessentials.api.menu.MenuViewContext;
 import com.knifedude.menuessentials.api.menu.components.buttons.Button;
+import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
 import com.knifedude.menuessentials.api.menu.slot.Slot;
 import com.knifedude.menuessentials.api.menu.slot.SlotRow;
 

@@ -7,4 +7,6 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
 
     protected abstract void init(TSlotContainer slotContainer, MenuViewContext context);
 
+
+
 }

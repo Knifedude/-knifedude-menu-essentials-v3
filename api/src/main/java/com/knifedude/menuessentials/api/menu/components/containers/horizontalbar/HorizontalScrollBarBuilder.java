@@ -1,6 +1,7 @@
-package com.knifedude.menuessentials.api.menu.components.containers;
+package com.knifedude.menuessentials.api.menu.components.containers.horizontalbar;
 
 import com.knifedude.menuessentials.api.item.models.ItemType;
+import com.knifedude.menuessentials.api.menu.components.containers.PageContainer;
 import com.knifedude.menuessentials.api.text.models.Text;
 
 import java.util.function.Function;
