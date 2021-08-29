@@ -1,6 +1,6 @@
 package com.knifedude.menuessentials.api.inventory.events;
 
-import com.knifedude.menuessentials.api.menu.models.ClickType;
+import com.knifedude.menuessentials.api.menu.ClickType;
 import com.knifedude.menuessentials.api.player.models.Player;
 
 public class InventoryClickEvent {
