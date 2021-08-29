@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.common.validation.Assert;
 import com.knifedude.menuessentials.api.inventory.model.Inventory;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
+import com.knifedude.menuessentials.api.menu.slot.SlotRow;
 import com.knifedude.menuessentials.api.player.models.Player;
 
 import java.util.Map;
@@ -60,7 +61,7 @@ public final class MenuView {
                     .ifPresent(view -> player.closeInventory());
     }
 
-    public SlotContainer createFromRow(String containerName, int row) {
+    public SlotRow createFromRow(String containerName, int row) {
         throw new UnsupportedOperationException();
     }
 
