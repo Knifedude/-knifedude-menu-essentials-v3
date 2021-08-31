@@ -4,6 +4,6 @@ import java.util.Collection;
 
 public interface PageSourceFactory {
 
-    <TElement> PageSource<TElement> create(Collection<TElement> elements, int pageSize);
+    <TElement> PageSource<TElement> create(Collection<TElement> elements);
 
 }
