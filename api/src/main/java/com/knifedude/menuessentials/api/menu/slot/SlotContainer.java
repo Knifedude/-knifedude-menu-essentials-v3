@@ -96,6 +96,10 @@ public class SlotContainer implements Iterable<Slot> {
         return IntStream.range(fromRowIndex, toRowIndex).mapToObj(this::getSingleRow).collect(Collectors.toList());
     }
 
+    public void clear() {
+        slots().forEach(Slot::clear);
+    }
+
     @Override
     public Iterator<Slot> iterator() {
         return new SlotSourceIterator(slotSource);

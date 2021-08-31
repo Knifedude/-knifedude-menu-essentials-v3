@@ -3,6 +3,7 @@ package com.knifedude.menuessentials.api.menu;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.common.validation.Assert;
 import com.knifedude.menuessentials.api.inventory.model.Inventory;
+import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 import com.knifedude.menuessentials.api.menu.slot.SlotRow;
 import com.knifedude.menuessentials.api.player.models.Player;
@@ -10,6 +11,7 @@ import com.knifedude.menuessentials.api.player.models.Player;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 
 public final class MenuView {
 
@@ -17,7 +19,7 @@ public final class MenuView {
     private final Player player;
     private final MenuViewRegister viewRegister;
     private final UUID uniqueID;
-    private final Map<String,SlotContainer> containers;
+    private final Map<String, ContainerComponent> containerComponents;
 
     MenuView(Inventory inventory, Player player, MenuViewRegister viewRegister) {
         Assert.notNull(inventory, "inventory");
@@ -28,7 +30,7 @@ public final class MenuView {
         this.player = player;
         this.viewRegister = viewRegister;
         this.uniqueID = UUID.randomUUID();
-        this.containers = Maps.newHashMap();
+        this.containerComponents = Maps.newHashMap();
     }
 
     public Optional<SlotContainer> getContainer(String name) {
@@ -61,17 +63,20 @@ public final class MenuView {
                     .ifPresent(view -> player.closeInventory());
     }
 
-    public SlotRow createFromRow(String containerName, int row) {
-        throw new UnsupportedOperationException();
-    }
+    public void add()
 
-    public SlotContainer createFromRowsRange(String containerName, int fromRow, int toRow) {
-        throw new UnsupportedOperationException();
-    }
 
-    public SlotContainer createRow(String containerName, int rowIndex) {
-        throw new UnsupportedOperationException();
-    }
+//    public SlotRow createFromRow(String containerName, int row) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public SlotContainer createFromRowsRange(String containerName, int fromRow, int toRow) {
+//        throw new UnsupportedOperationException();
+//    }
+//
+//    public SlotContainer createRow(String containerName, int rowIndex) {
+//        throw new UnsupportedOperationException();
+//    }
 
 
 }

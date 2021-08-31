@@ -5,6 +5,7 @@ import com.knifedude.menuessentials.api.MenuEssentialsAPI;
 import com.knifedude.menuessentials.api.item.models.ItemType;
 import com.knifedude.menuessentials.api.menu.Menu;
 import com.knifedude.menuessentials.api.menu.ToolBox;
+import com.knifedude.menuessentials.api.menu.components.containers.navigation.NavigationBar;
 import com.knifedude.menuessentials.api.menu.components.containers.navigation.NavigationBarBuilder;
 import com.knifedude.menuessentials.api.menu.data.MenuHeight;
 import com.knifedude.menuessentials.api.menu.data.MenuWidth;
@@ -26,7 +27,7 @@ public class Example {
         Menu menu = tb.createMenu(MenuWidth.NINE, MenuHeight.SIX, menuView -> {
             // Init
             SlotRow topBar = menuView.createFromRow("top-bar", 0);
-            tb.newNavigationBar()
+            NavigationBar navbar = tb.newNavigationBar()
               .withContainer(topBar)
               .withTarget("item-container")
               .withNavigationButton(0, "All", dummyType, () -> dummy)
@@ -40,7 +41,8 @@ public class Example {
               .withNavigationButton(8, "Category-8", dummyType, () -> dummy)
               .build();
 
-            
+            menuView.add
+
 
 
         });
