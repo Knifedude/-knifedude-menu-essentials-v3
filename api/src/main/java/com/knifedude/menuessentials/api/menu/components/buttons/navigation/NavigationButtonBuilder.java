@@ -1,5 +1,6 @@
 package com.knifedude.menuessentials.api.menu.components.buttons.navigation;
 
+import com.knifedude.menuessentials.api.common.register.Register;
 import com.knifedude.menuessentials.api.menu.components.buttons.Button;
 import com.knifedude.menuessentials.api.menu.components.buttons.ButtonBuilder;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
@@ -12,5 +13,9 @@ public interface NavigationButtonBuilder <TInstance extends Button,TBuilder exte
     TBuilder withCollectionSupplier(Supplier<Collection<SlotComponent>> componentSupplier);
 
     TBuilder withContainerTarget(String containerName);
+
+    static NavigationButtonBuilder<?,?> builder() {
+        return Register.getBuilder(NavigationButtonBuilder.class);
+    }
 
 }

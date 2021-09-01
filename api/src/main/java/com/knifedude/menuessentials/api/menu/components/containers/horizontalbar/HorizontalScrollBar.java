@@ -16,26 +16,14 @@ import java.util.Optional;
 public class HorizontalScrollBar extends ContainerComponent<SlotRow> {
 
     private Button previousPageBtn, nextPageBtn;
-    private Map<Integer,Button> buttons;
 
+    HorizontalScrollBar(int width, Button nextPageButton, Button previousPageButton) {
+        super(width, 1);
+        this.previousPageBtn = previousPageButton;
+        this.nextPageBtn = nextPageButton;
 
-    HorizontalScrollBar(Button previousPage, Button nextPage) {
-        this.previousPageBtn = previousPage;
-        this.nextPageBtn = nextPage;
-        this.buttons = Maps.newHashMap();
+        setComponent(0, previousPageButton);
+        setComponent(width - 1, nextPageButton);
     }
 
-    @Override
-    protected void init(SlotRow slotContainer, MenuViewContext context) {
-        Slot first = slotContainer.first().orElseThrow(() -> new NoSuchElementException("Given slotContainer was empty"));
-        Slot last = slotContainer.last().orElseThrow(() -> new NoSuchElementException("Given slotContainer was empty"));
-
-        Preconditions.checkArgument(first.getRawIndex() != last.getRawIndex(), "Minimum size of horizontal scrollbar is 2");
-
-        first.setComponent(previousPageBtn);
-        buttons.put(first.getRawIndex(), previousPageBtn);
-
-        last.setComponent(nextPageBtn);
-        buttons.put(last.getRawIndex(), nextPageBtn);
-    }
 }
