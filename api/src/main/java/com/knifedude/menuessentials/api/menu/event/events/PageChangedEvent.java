@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.menu.events;
+package com.knifedude.menuessentials.api.menu.event.events;
 
 public class PageChangedEvent {
 
