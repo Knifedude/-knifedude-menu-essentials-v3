@@ -14,6 +14,8 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
     private SlotContainer container;
 
     public ContainerComponent(int width, int height) {
+        Preconditions.checkArgument(width >= 1, "Width must be >= 1");
+        Preconditions.checkArgument(height >= 1, "Height must be >= 1");
         this.width = width;
         this.height = height;
         this.components = Maps.newHashMap();
