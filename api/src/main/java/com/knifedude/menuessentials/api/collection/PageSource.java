@@ -20,7 +20,7 @@ public interface PageSource<TElement> {
      * @param pageIndex The index of the page
      * @return True if the page does exist
      */
-    boolean hasPage(int pageIndex);
+    boolean hasPage(int pageIndex, int pageSize);
 
     static <TElement> PageSource<TElement> from(Collection<TElement> elements) {
         return Register.getFactory(PageSourceFactory.class).create(elements);

@@ -9,8 +9,8 @@ import java.util.Map;
 
 public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  {
 
-    private int width, height;
-    private Map<Integer, SlotComponent> components;
+    private final int width, height;
+    private final Map<Integer, SlotComponent> components;
     private SlotContainer container;
 
     public ContainerComponent(int width, int height) {
@@ -19,6 +19,10 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         this.width = width;
         this.height = height;
         this.components = Maps.newHashMap();
+    }
+
+    public final int size() {
+        return width * height;
     }
 
     void detach() {
@@ -39,7 +43,7 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         components.forEach((key, value) -> container.getSlot(key).setComponent(value));
     }
 
-    protected void setComponent(int index, SlotComponent component) {
+    protected final void setComponent(int index, SlotComponent component) {
         Preconditions.checkArgument(index >= 0, "Index must be >= 0");
         Preconditions.checkArgument(index < (width * height), String.format("Index must be within bounds (<%d) but was %d", width * height, index));
 
@@ -56,8 +60,15 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         }
     }
 
-    protected void removeComponent(int index) {
+    protected final void removeComponent(int index) {
         setComponent(index, null);
+    }
+
+    protected final void clear() {
+        this.components.clear();
+        if (container != null) {
+            container.clear();
+        }
     }
 
 }
