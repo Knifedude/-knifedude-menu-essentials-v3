@@ -1,21 +1,16 @@
 package com.knifedude.menuessentials.api.menu.event.events;
 
+import com.knifedude.menuessentials.api.menu.behaviors.Pageable;
+
 public class PageChangedEvent {
 
-    private int fromPageIndex, toPageIndex;
+    private Pageable target;
 
-    public PageChangedEvent(int fromPageIndex, int toPageIndex) {
-        this.fromPageIndex = fromPageIndex;
-        this.toPageIndex = toPageIndex;
+    public PageChangedEvent(Pageable target) {
+        this.target = target;
     }
 
-    public int getFromPageIndex() {
-        return fromPageIndex;
+    public Pageable getTarget() {
+        return target;
     }
-
-    public int getToPageIndex() {
-        return toPageIndex;
-    }
-
-
 }

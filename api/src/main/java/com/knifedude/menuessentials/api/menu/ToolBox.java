@@ -2,7 +2,7 @@ package com.knifedude.menuessentials.api.menu;
 
 import com.knifedude.menuessentials.api.menu.components.buttons.ButtonBuilder;
 import com.knifedude.menuessentials.api.menu.components.buttons.navigation.NavigationButtonBuilder;
-import com.knifedude.menuessentials.api.menu.components.containers.horizontalbar.HorizontalScrollBarBuilder;
+import com.knifedude.menuessentials.api.menu.components.containers.scroll.ScrollBarBuilder;
 import com.knifedude.menuessentials.api.menu.components.containers.navigation.NavigationBarBuilder;
 import com.knifedude.menuessentials.api.menu.data.MenuHeight;
 import com.knifedude.menuessentials.api.menu.data.MenuWidth;
@@ -13,7 +13,7 @@ public interface ToolBox {
 
     ButtonBuilder<?,?> newButton();
 
-    HorizontalScrollBarBuilder<?,?> newHorizontalScrollBar();
+    ScrollBarBuilder<?,?> newHorizontalScrollBar();
 
     NavigationButtonBuilder<?,?> newNavigationButton();
 

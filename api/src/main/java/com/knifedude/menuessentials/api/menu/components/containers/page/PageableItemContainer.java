@@ -2,8 +2,10 @@ package com.knifedude.menuessentials.api.menu.components.containers.page;
 
 import com.google.common.collect.Lists;
 import com.knifedude.menuessentials.api.collection.PageSource;
+import com.knifedude.menuessentials.api.menu.Border;
 import com.knifedude.menuessentials.api.menu.behaviors.Pageable;
 import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
+import com.knifedude.menuessentials.api.menu.event.events.PageChangedEvent;
 import com.knifedude.menuessentials.api.menu.event.listeners.PageChangeListener;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
@@ -17,10 +19,19 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     private PageSource<SlotComponent> pageSource;
     private int currentPageIndex = 0;
 
-    public PageableItemContainer(int width, int height) {
+    public PageableItemContainer(int width, int height, Border scrollbar) {
         super(width, height);
 
         this.pageChangeListeners = Lists.newArrayList();
+    }
+
+    public void goToPage(int pageIndex) {
+        if (pageSource.hasPage(pageIndex, getNrOfItemsPerPage())) {
+            clear();
+            Collection<SlotComponent> components = pageSource.getPage(pageIndex, getNrOfItemsPerPage());
+            setComponents(components);
+            triggerPageChangeEvent();
+        }
     }
 
     public void setSource(Collection<SlotComponent> components) {
@@ -30,11 +41,7 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     public void setSource(PageSource<SlotComponent> source) {
         this.pageSource = source;
         this.currentPageIndex = 0;
-        clear();
-
-        if (this.pageSource.hasPage(currentPageIndex, getNrOfItemsPerPage())) {
-             setComponents(this.pageSource.getPage(currentPageIndex, getNrOfItemsPerPage()));
-        }
+        goToPage(currentPageIndex);
     }
 
     public int getNrOfItemsPerPage() {
@@ -59,18 +66,16 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     @Override
     public void nextPage() {
         if (hasNextPage()) {
-            clear();
-            setComponents(pageSource.getPage(currentPageIndex + 1, getNrOfItemsPerPage()));
             currentPageIndex++;
+            goToPage(currentPageIndex);
         }
     }
 
     @Override
     public void previousPage() {
         if (hasPreviousPage()) {
-            clear();
-            setComponents(pageSource.getPage(currentPageIndex -1, getNrOfItemsPerPage()));
             currentPageIndex--;
+            goToPage(currentPageIndex);
         }
     }
 
@@ -81,11 +86,13 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
         }
     }
 
-
     @Override
     public void addPageListener(PageChangeListener listener) {
         this.pageChangeListeners.add(listener);
     }
 
-
+    private void triggerPageChangeEvent() {
+        PageChangedEvent event = new PageChangedEvent(this);
+        this.pageChangeListeners.forEach(listener -> listener.onPageChange(event));
+    }
 }

@@ -60,6 +60,19 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         }
     }
 
+    protected final void setComponent(int x, int y, SlotComponent component) {
+        int index = y * width + x;
+        setComponent(index, component);
+    }
+
+    protected final void setFirstSlot(SlotComponent slotComponent) {
+        setComponent(0, slotComponent);
+    }
+
+    protected final void setLastSlot(SlotComponent slotComponent) {
+
+    }
+
     protected final void removeComponent(int index) {
         setComponent(index, null);
     }
@@ -70,5 +83,7 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
             container.clear();
         }
     }
+
+
 
 }
