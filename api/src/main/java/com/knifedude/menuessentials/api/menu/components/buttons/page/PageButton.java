@@ -7,8 +7,6 @@ import com.knifedude.menuessentials.api.menu.ClickContext;
 import com.knifedude.menuessentials.api.menu.components.buttons.Button;
 import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -24,8 +22,6 @@ public class PageButton extends Button {
         this(ItemStack.builder().withItemType(displayItemType).withDisplayName(displayName).build(), Lists.newArrayList(), currentPageDisplayFunction, clickHandlers);
     }
 
-
-
     public PageButton(ItemType displayItemType, Text displayName, List<String> tags, Function<Integer,Text> currentPageDisplayFunction, ClickHandler... clickHandlers) {
         this(ItemStack.builder().withItemType(displayItemType).withDisplayName(displayName).build(), tags, currentPageDisplayFunction, clickHandlers);
     }
@@ -39,7 +35,6 @@ public class PageButton extends Button {
     @Override
     public void onClick(ClickContext context) {
         super.onClick(context);
-
-
     }
+
 }
