@@ -1,5 +1,7 @@
 package com.knifedude.menuessentials.api.menu.behaviors;
 
+import com.knifedude.menuessentials.api.menu.MenuComponent;
+import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
 import com.knifedude.menuessentials.api.menu.event.listeners.PageChangeListener;
 
 public interface Pageable {
@@ -22,6 +24,8 @@ public interface Pageable {
 
     void previousPage();
 
-    void addPageListener(PageChangeListener listener);
+    void registerPageButton(PageButton button);
+
+    void unregisterPageButton(PageButton button);
 
 }

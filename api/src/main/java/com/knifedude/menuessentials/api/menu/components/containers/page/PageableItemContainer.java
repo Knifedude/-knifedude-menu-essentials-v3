@@ -1,28 +1,30 @@
 package com.knifedude.menuessentials.api.menu.components.containers.page;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.collection.PageSource;
 import com.knifedude.menuessentials.api.menu.Border;
 import com.knifedude.menuessentials.api.menu.behaviors.Pageable;
+import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
 import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
 import com.knifedude.menuessentials.api.menu.event.events.PageChangedEvent;
-import com.knifedude.menuessentials.api.menu.event.listeners.PageChangeListener;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class PageableItemContainer extends ContainerComponent<SlotContainer> implements Pageable {
 
-    private final List<PageChangeListener> pageChangeListeners;
+    private final Map<UUID,PageButton> pageButtons;
     private PageSource<SlotComponent> pageSource;
     private int currentPageIndex = 0;
 
     public PageableItemContainer(int width, int height, Border scrollbar) {
         super(width, height);
 
-        this.pageChangeListeners = Lists.newArrayList();
+        this.pageButtons = Maps.newHashMap();
     }
 
     public void goToPage(int pageIndex) {
@@ -87,12 +89,17 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     }
 
     @Override
-    public void addPageListener(PageChangeListener listener) {
-        this.pageChangeListeners.add(listener);
+    public void registerPageButton(PageButton pageButton) {
+        this.pageButtons.put(pageButton.getUniqueId(), pageButton);
+    }
+
+    @Override
+    public void unregisterPageButton(PageButton button) {
+        this.pageButtons.remove(button.getUniqueId());
     }
 
     private void triggerPageChangeEvent() {
         PageChangedEvent event = new PageChangedEvent(this);
-        this.pageChangeListeners.forEach(listener -> listener.onPageChange(event));
+        this.pageButtons.values().forEach(pageButton -> pageButton.onPageChange(event));
     }
 }

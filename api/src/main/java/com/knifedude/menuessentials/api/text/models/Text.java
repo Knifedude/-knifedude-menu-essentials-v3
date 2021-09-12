@@ -24,6 +24,11 @@ public interface Text extends TextElement, Comparable<Text> {
 
     Text concat(Text other);
 
+    default Text concat(String other) {
+        return concat(Text.of(other));
+    }
+
+
     default Builder toBuilder() {
         return Text.builder()
                 .content(getContent())

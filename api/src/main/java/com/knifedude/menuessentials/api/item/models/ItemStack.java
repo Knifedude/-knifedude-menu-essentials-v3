@@ -35,9 +35,7 @@ public interface ItemStack extends HasDisplayName {
         return builder;
     }
 
-    static ItemStack.Builder builder() {
-        return Register.getBuilder(ItemStack.Builder.class);
-    }
+
 
     void setDisplayName(Text newName);
 
@@ -68,6 +66,23 @@ public interface ItemStack extends HasDisplayName {
         ItemStack build();
 
     }
+
+    static ItemStack.Builder builder() {
+        return Register.getBuilder(ItemStack.Builder.class);
+    }
+
+    static ItemStack of(ItemType itemType) {
+        return ItemStack.builder().withItemType(itemType).build();
+    }
+
+    static ItemStack of(ItemType itemType, Text displayName) {
+        return ItemStack.builder().withItemType(itemType).withDisplayName(displayName).build();
+    }
+
+    static ItemStack of(ItemType itemType, Text displayName, Lore lore) {
+        return ItemStack.builder().withItemType(itemType).withDisplayName(displayName).withLore(lore).build();
+    }
+
 
 
 }

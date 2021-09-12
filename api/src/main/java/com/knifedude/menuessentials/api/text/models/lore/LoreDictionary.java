@@ -29,6 +29,14 @@ public interface LoreDictionary extends Supplier<Lore> {
     Lore get();
 
     /**
+     * Creates a new Lore using the entries of this dictionary. Executes the {@link #get()}
+     * @return The lore
+     */
+    default Lore toLore() {
+        return get();
+    }
+
+    /**
      * Sets the {@link FontFormat} for the value
      * @param format The {@link FontFormat}
      */
@@ -53,12 +61,14 @@ public interface LoreDictionary extends Supplier<Lore> {
      */
     void addEntry(String key, String value);
 
+
+
     /**
      * Adds an entry to this dictionary
      * @param key The key
      * @param value The value
      */
-    void addEntryCustom(Text key, Text value);
+    void addEntry(Text key, Text value);
 
     /**
      * Adds an entry to this dictionary
