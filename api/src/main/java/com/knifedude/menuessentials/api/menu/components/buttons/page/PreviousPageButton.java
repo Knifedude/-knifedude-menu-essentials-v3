@@ -50,9 +50,9 @@ public class PreviousPageButton extends PageButton {
         lore.clear();
 
         Text currentPageText = createCurrentPageText();
-        Text nextPageText = createPreviousPageText();
+        Text previousPageText = createPreviousPageText();
         lore.addText(currentPageText);
-        lore.addText(nextPageText);
+        lore.addText(previousPageText);
 
         setDisplayLore(lore);
     }
