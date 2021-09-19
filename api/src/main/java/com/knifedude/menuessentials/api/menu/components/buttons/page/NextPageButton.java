@@ -50,8 +50,7 @@ public class NextPageButton extends PageButton {
 
         Text currentPageText = createCurrentPageText();
         Text nextPageText = createNextPageText();
-        lore.addText(currentPageText);
-        lore.addText(nextPageText);
+        lore.addLines(currentPageText, nextPageText);
 
         setDisplayLore(lore);
     }

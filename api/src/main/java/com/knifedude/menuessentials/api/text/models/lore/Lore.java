@@ -11,6 +11,8 @@ public interface Lore {
 
     void addText(Text text);
 
+    void addLines(Text... line);
+
     void removeText(Text text);
 
     void clear();
