@@ -21,7 +21,7 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     private PageSource<SlotComponent> pageSource;
     private int currentPageIndex = 0;
 
-    public PageableItemContainer(int width, int height, Border scrollbar) {
+    public PageableItemContainer(int width, int height) {
         super(width, height);
 
         this.pageButtons = Maps.newHashMap();

@@ -70,9 +70,9 @@ public abstract class PageButton extends Button implements PageChangeListener {
 
     protected final Text createCurrentPageText() {
         return getTarget().map(pageable -> {
-            Map<String,Object> args = Maps.newHashMap();
-            args.put(PageArgs.CURRENT_PAGE, pageable.getCurrentPageIndex() + 1);
-            return currentPageTemplate.toText(args);
+            PageArgs pageArgs = new PageArgs();
+            pageArgs.setCurrentPageByIndex(pageable.getCurrentPageIndex());
+            return currentPageTemplate.toText(pageArgs.toMap());
         }).orElse(Text.empty());
     }
 

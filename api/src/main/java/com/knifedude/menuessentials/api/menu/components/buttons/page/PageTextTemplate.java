@@ -9,9 +9,9 @@ import java.util.function.Function;
 public class PageTextTemplate implements TextTemplate {
 
     private static final String INITIAL_PAGE = "-";
-    private static final Function<Map<String,?>, Object> CURRENT_PAGE_MAPPING = (args) -> args.get(PageArgs.CURRENT_PAGE);
-    private static final Function<Map<String,?>, Object> NEXT_PAGE_MAPPING = (args) -> args.get(PageArgs.NEXT_PAGE);
-    private static final Function<Map<String,?>, Object> PREVIOUS_PAGE_MAPPING = (args) -> args.get(PageArgs.PREVIOUS_PAGE);
+    private static final Function<Map<String,?>, Object> CURRENT_PAGE_MAPPING = PageArgs::getCurrentPage;
+    private static final Function<Map<String,?>, Object> NEXT_PAGE_MAPPING = PageArgs::getNextPage;
+    private static final Function<Map<String,?>, Object> PREVIOUS_PAGE_MAPPING = PageArgs::getPreviousPage;
 
     private final Text keyName;
     private final Function<Text, Text> valueStyling;
