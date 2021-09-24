@@ -78,11 +78,4 @@ public abstract class PageButton extends Button implements PageChangeListener {
 
     protected abstract void update();
 
-    @Override
-    public void onClick(ClickContext context) {
-        super.onClick(context);
-    }
-
-
-
 }

@@ -38,9 +38,9 @@ public class PreviousPageButton extends PageButton {
 
     protected final Text createPreviousPageText() {
         return getTarget().map(pageable -> {
-            Map<String,Object> args = Maps.newHashMap();
-            args.put(PageArgs.PREVIOUS_PAGE, pageable.getPreviousPageIndex() + 1);
-            return previousPageTemplate.toText(args);
+            PageArgs args = new PageArgs();
+            args.setPreviousPageByIndex(pageable.getPreviousPageIndex());
+            return previousPageTemplate.toText(args.toMap());
         }).orElse(Text.empty());
     }
 

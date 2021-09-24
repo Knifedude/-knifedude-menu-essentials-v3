@@ -37,9 +37,9 @@ public class NextPageButton extends PageButton {
 
     protected final Text createNextPageText() {
         return getTarget().map(pageable -> {
-            Map<String,Object> args = Maps.newHashMap();
-            args.put(PageArgs.NEXT_PAGE, pageable.getNextPageIndex() + 1);
-            return nextPageTemplate.toText(args);
+            PageArgs args = new PageArgs();
+            args.setNextPageByIndex(pageable.getNextPageIndex());
+            return nextPageTemplate.toText(args.toMap());
         }).orElse(Text.empty());
     }
 
