@@ -14,10 +14,10 @@ public interface NavigationBarBuilder {
 
     NavigationBarBuilder withTarget(String targetContainer);
 
-    NavigationBarBuilder withNavigationButton(int index, Text title, ItemType itemType, Supplier<Collection<SlotComponent>> supplier);
+    NavigationBarBuilder withNavigationButton(int index, Text title, ItemType itemType, Collection<SlotComponent> collection);
 
-    default NavigationBarBuilder withNavigationButton(int index, String title, ItemType itemType, Supplier<Collection<SlotComponent>> supplier) {
-        return withNavigationButton(index, Text.of(title), itemType, supplier);
+    default NavigationBarBuilder withNavigationButton(int index, String title, ItemType itemType, Collection<SlotComponent> collection) {
+        return withNavigationButton(index, Text.of(title), itemType, collection);
     }
 
     NavigationBar build();

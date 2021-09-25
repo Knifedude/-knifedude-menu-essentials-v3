@@ -13,6 +13,10 @@ public interface ButtonBuilder<TInstance extends Button, TBuilder extends Button
 
     TBuilder withDisplayName(Text text);
 
+    default TBuilder withDisplayName(String text) {
+        return withDisplayName(Text.of(text));
+    }
+
     TBuilder withOnClick(ClickHandler... clickHandler);
 
     TInstance build();

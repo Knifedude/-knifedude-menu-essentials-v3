@@ -90,10 +90,12 @@ public class SlotContainer implements Iterable<Slot> {
         return IntStream.range(fromColumnIndex, toColumnIndex).mapToObj(this::getSingleColumn).collect(Collectors.toList());
     }
 
-    public List<SlotRow> getRowsInRange(int fromRowIndex, int toRowIndex) {
+    public List<SlotContainer> getRowsInRange(int fromRowIndex, int toRowIndex) {
         Preconditions.checkArgument(fromRowIndex >= 0, "The argument 'fromColumnIndex' must be >= 0");
         Preconditions.checkArgument(toRowIndex < height, String.format("The argument 'toColumnIndex' must be within bounds (between 0 and %d)", width));
-        return IntStream.range(fromRowIndex, toRowIndex).mapToObj(this::getSingleRow).collect(Collectors.toList());
+
+
+
     }
 
     public void clear() {

@@ -1,9 +1,10 @@
 package com.knifedude.menuessentials.api.menu;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.common.validation.Assert;
 import com.knifedude.menuessentials.api.inventory.model.Inventory;
-import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
+import com.knifedude.menuessentials.api.menu.components.containers.item.ItemContainer;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 import com.knifedude.menuessentials.api.menu.slot.SlotRow;
 import com.knifedude.menuessentials.api.player.models.Player;
@@ -19,7 +20,8 @@ public final class MenuView {
     private final Player player;
     private final MenuViewRegister viewRegister;
     private final UUID uniqueID;
-    private final Map<String, ContainerComponent> containerComponents;
+    private final Map<String, ItemContainer<?>> containerComponents;
+    private final SlotContainer root;
 
     MenuView(Inventory inventory, Player player, MenuViewRegister viewRegister) {
         Assert.notNull(inventory, "inventory");
@@ -31,10 +33,11 @@ public final class MenuView {
         this.viewRegister = viewRegister;
         this.uniqueID = UUID.randomUUID();
         this.containerComponents = Maps.newHashMap();
+        this.root = new SlotContainer(inventory);
     }
 
-    public Optional<SlotContainer> getContainer(String name) {
-        return Optional.ofNullable(containers.get(name));
+    public Optional<ItemContainer<?>> getContainer(String name) {
+        return Optional.ofNullable(containerComponents.get(name));
     }
 
     public int size() {
@@ -63,20 +66,28 @@ public final class MenuView {
                     .ifPresent(view -> player.closeInventory());
     }
 
-    public void add()
+    public <TItemContainer extends ItemContainer<SlotRow>> TItemContainer createFromRow(String containerName, int rowIndex, Function<SlotRow, TItemContainer> containerFunction) {
+        Preconditions.checkArgument(!containerExists(containerName), String.format("Container with name '%s' already exists", containerName));
 
+        SlotRow slotRow = root.getSingleRow(rowIndex);
+        TItemContainer rowContainer = containerFunction.apply(slotRow);
+        containerComponents.put(containerName, rowContainer);
 
-//    public SlotRow createFromRow(String containerName, int row) {
-//        throw new UnsupportedOperationException();
-//    }
-//
-//    public SlotContainer createFromRowsRange(String containerName, int fromRow, int toRow) {
-//        throw new UnsupportedOperationException();
-//    }
-//
-//    public SlotContainer createRow(String containerName, int rowIndex) {
-//        throw new UnsupportedOperationException();
-//    }
+        return rowContainer;
+    }
 
+    public <TItemContainer extends ItemContainer<SlotContainer>> TItemContainer createFromRowsRange(String containerName, int fromRow, int toRow, Function<SlotContainer, TItemContainer> containerFunction) {
+        Preconditions.checkArgument(!containerExists(containerName), String.format("Container with name '%s' already exists", containerName));
+
+        SlotRow slotRow = root.getRowsInRange(fromRow, toRow);
+        TItemContainer rowContainer = containerFunction.apply(slotRow);
+        containerComponents.put(containerName, rowContainer);
+
+        return rowContainer;
+    }
+
+    public boolean containerExists(String containerName) {
+        return containerComponents.containsKey(containerName);
+    }
 
 }

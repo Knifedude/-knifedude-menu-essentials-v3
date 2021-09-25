@@ -1,9 +1,12 @@
-package com.knifedude.menuessentials.api.menu.components.buttons.page;
+package com.knifedude.menuessentials.api.menu.components.buttons.page.previous;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
+import com.knifedude.menuessentials.api.menu.components.buttons.page.PageArgs;
+import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
+import com.knifedude.menuessentials.api.menu.components.buttons.page.PageTextTemplate;
 import com.knifedude.menuessentials.api.menu.event.events.PageChangedEvent;
 import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;

@@ -1,24 +1,45 @@
-package com.knifedude.menuessentials.api.menu.components.containers;
+package com.knifedude.menuessentials.api.menu.components.containers.item;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import com.knifedude.menuessentials.api.menu.MenuView;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Stream;
 
-public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  {
+public abstract class ItemContainer<TSlotContainer extends SlotContainer>  {
 
     private final int width, height;
     private final Map<Integer, SlotComponent> components;
     private SlotContainer container;
+    private MenuView view;
 
-    public ContainerComponent(int width, int height) {
+    public ItemContainer(int width, int height) {
         Preconditions.checkArgument(width >= 1, "Width must be >= 1");
         Preconditions.checkArgument(height >= 1, "Height must be >= 1");
         this.width = width;
         this.height = height;
         this.components = Maps.newHashMap();
+    }
+
+    public Collection<SlotComponent> getComponents() {
+        return new ArrayList<>(components.values());
+    }
+
+    public Stream<SlotComponent> streamComponents() {
+        return components.values().stream();
+    }
+
+    public final int width() {
+        return width;
+    }
+
+    public final int height() {
+        return height;
     }
 
     public final int size() {
@@ -32,13 +53,14 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         }
     }
 
-    void attach(SlotContainer container) {
+    void attach(MenuView view, TSlotContainer container) {
         Preconditions.checkNotNull(container, "Can't attach to null container, user detach() instead");
         Preconditions.checkArgument(container.width() == this.width, "Given container didn't match this components width");
         Preconditions.checkArgument(container.height() == this.height, "Given container didn't match this components height");
 
         detach();
 
+        this.view = view;
         this.container = container;
         components.forEach((key, value) -> container.getSlot(key).setComponent(value));
     }
@@ -77,12 +99,13 @@ public abstract class ContainerComponent<TSlotContainer extends SlotContainer>  
         setComponent(index, null);
     }
 
-    protected final void clear() {
+    public final void clear() {
         this.components.clear();
         if (container != null) {
             container.clear();
         }
     }
+
 
 
 

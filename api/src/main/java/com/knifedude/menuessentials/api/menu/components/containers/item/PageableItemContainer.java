@@ -1,21 +1,19 @@
-package com.knifedude.menuessentials.api.menu.components.containers.page;
+package com.knifedude.menuessentials.api.menu.components.containers.item;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.collection.PageSource;
-import com.knifedude.menuessentials.api.menu.Border;
 import com.knifedude.menuessentials.api.menu.behaviors.Pageable;
 import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
-import com.knifedude.menuessentials.api.menu.components.containers.ContainerComponent;
 import com.knifedude.menuessentials.api.menu.event.events.PageChangedEvent;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
-public class PageableItemContainer extends ContainerComponent<SlotContainer> implements Pageable {
+public class PageableItemContainer extends ItemContainer<SlotContainer> implements Pageable {
 
     private final Map<UUID,PageButton> pageButtons;
     private PageSource<SlotComponent> pageSource;
@@ -28,7 +26,7 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
     }
 
     public void goToPage(int pageIndex) {
-        if (pageSource.hasPage(pageIndex, getNrOfItemsPerPage())) {
+        if (pageSource != null && pageSource.hasPage(pageIndex, getNrOfItemsPerPage())) {
             clear();
             Collection<SlotComponent> components = pageSource.getPage(pageIndex, getNrOfItemsPerPage());
             setComponents(components);
@@ -36,14 +34,20 @@ public class PageableItemContainer extends ContainerComponent<SlotContainer> imp
         }
     }
 
-    public void setSource(Collection<SlotComponent> components) {
-        this.setSource(PageSource.from(components));
+    public void setSource(@Nullable Collection<SlotComponent> components) {
+        this.setSource(components != null ? PageSource.from(components) : null);
     }
 
-    public void setSource(PageSource<SlotComponent> source) {
+    public void setSource(@Nullable PageSource<SlotComponent> source) {
         this.pageSource = source;
         this.currentPageIndex = 0;
-        goToPage(currentPageIndex);
+
+        if (pageSource != null) {
+            goToPage(currentPageIndex);
+        } else {
+            clear();
+        }
+
     }
 
     public int getNrOfItemsPerPage() {
