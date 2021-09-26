@@ -3,10 +3,12 @@ package com.knifedude.menuessentials.api.menu.slot;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.inventory.model.Inventory;
+import com.knifedude.menuessentials.api.menu.shapes.Rectangle;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SlotContainer implements Iterable<Slot> {
 
@@ -14,11 +16,11 @@ public class SlotContainer implements Iterable<Slot> {
     private final int width, height;
     private final SlotSource slotSource;
 
-    SlotContainer(List<Slot> slots, int width, int height) {
+    public SlotContainer(SlotContainer parent, Rectangle selection) {
         this.slots = new HashMap<>();
-        this.width = width;
-        this.height = height;
-        this.slotSource = new ListSlotSource(slots); // Lazy init
+        this.width = selection.width();
+        this.height = selection.height();
+        this.slotSource = new ListSlotSource(parent.slotsFromRectangle(selection).collect(Collectors.toList())); // Lazy init
     }
 
     public SlotContainer(Inventory inventory) {
@@ -38,6 +40,15 @@ public class SlotContainer implements Iterable<Slot> {
 
     public int height() {
         return height;
+    }
+
+    public boolean contains(int index) {
+        return index >= 0 && index < size();
+    }
+
+    public Optional<Slot> find(int index) {
+        if (contains(index)) return Optional.of(getSlot(index));
+        return Optional.empty();
     }
 
     public Slot getSlot(int index) {
@@ -90,13 +101,32 @@ public class SlotContainer implements Iterable<Slot> {
         return IntStream.range(fromColumnIndex, toColumnIndex).mapToObj(this::getSingleColumn).collect(Collectors.toList());
     }
 
-    public List<SlotContainer> getRowsInRange(int fromRowIndex, int toRowIndex) {
-        Preconditions.checkArgument(fromRowIndex >= 0, "The argument 'fromColumnIndex' must be >= 0");
-        Preconditions.checkArgument(toRowIndex < height, String.format("The argument 'toColumnIndex' must be within bounds (between 0 and %d)", width));
-
-
-
+    public List<SlotRow> getRowsInRage(int fromColumnIndex, int toColumnIndex) {
+        Preconditions.checkArgument(fromColumnIndex >= 0, "The argument 'fromColumnIndex' must be >= 0");
+        Preconditions.checkArgument(toColumnIndex < width, String.format("The argument 'toColumnIndex' must be within bounds (between 0 and %d)", width));
+        return IntStream.range(fromColumnIndex, toColumnIndex).mapToObj(this::getSingleRow).collect(Collectors.toList());
     }
+
+    public Stream<Slot> slotsFromRectangle(Rectangle selection) {
+        return slotsFromRectangle(selection.min().x(), selection.min().y(), selection.max().x(), selection.max().y());
+    }
+
+    public Stream<Slot> slotsFromRectangle(int firstX, int firstZ, int secondX, int secondY) {
+        int minX = Math.min(firstX, secondX);
+        int maxX = Math.max(firstX, secondX);
+        int minY = Math.min(firstZ, secondY);
+        int maxY = Math.max(firstZ, secondY);
+
+        return IntStream.range(minY, maxY)
+                .flatMap(y ->
+                        IntStream.range(minX, maxX)
+                                .map(x -> (y * width()) + x)
+                )
+                .sorted()
+                .mapToObj(index -> find(index).orElse(null))
+                .filter(Objects::nonNull);
+    }
+
 
     public void clear() {
         slots().forEach(Slot::clear);

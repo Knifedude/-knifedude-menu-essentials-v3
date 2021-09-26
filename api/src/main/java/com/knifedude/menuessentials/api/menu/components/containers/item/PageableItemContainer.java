@@ -106,4 +106,6 @@ public class PageableItemContainer extends ItemContainer<SlotContainer> implemen
         PageChangedEvent event = new PageChangedEvent(this);
         this.pageButtons.values().forEach(pageButton -> pageButton.onPageChange(event));
     }
+
 }
+

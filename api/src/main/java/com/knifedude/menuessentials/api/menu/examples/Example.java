@@ -29,10 +29,12 @@ public class Example {
 
         Menu menu = tb.createMenu(MenuWidth.NINE, MenuHeight.SIX, menuView -> {
             // Init
-            NavigationBar topBar = menuView.createFromRow("top-bar", 0, (row) ->
+
+            PageableItemContainer itemContainer = menuView.createContainer(2, 5, (box -> PageableItemContainerBuilder.builder().withContainer(box).build()));
+            menuView.createRow( 0, (row) ->
                 tb.newNavigationBar()
                     .withContainer(row)
-                    .withTarget("item-container")
+                    .withTarget(itemContainer)
                     .withNavigationButton(0, "All", dummyType, dummy)
                     .withNavigationButton(1, "Category-1", dummyType, dummy)
                     .withNavigationButton(2, "Category-2", dummyType, dummy)
@@ -48,17 +50,18 @@ public class Example {
             NextPageButton nextPageButton = NextPageButtonBuilder.builder()
                     .withDisplayItem(ItemType.from("minecraft:coal"))
                     .withDisplayName("Next page")
-                    .withTargetContainer("item-container")
+                    .withTarget(itemContainer)
                     .build();
-            menuView.
+            menuView.setComponent(0, 1, nextPageButton);
 
             PreviousPageButton previousPageButton = PreviousPageButtonBuilder.builder()
                     .withDisplayItem(ItemType.from("minecraft:coal"))
                     .withDisplayName("Previous page")
-                    .withTargetContainer("item-container")
+                    .withTarget(itemContainer)
                     .build();
+            menuView.setComponent(0, menuView.width(), previousPageButton);
 
-            PageableItemContainer itemContainer = menuView.createFromRowsRange("item-container", 2, 5, (box -> PageableItemContainerBuilder.builder().withContainer(box).build()));
+
 
 
 

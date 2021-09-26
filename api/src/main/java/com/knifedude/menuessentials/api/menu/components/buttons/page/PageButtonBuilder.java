@@ -11,8 +11,6 @@ public interface PageButtonBuilder<TInstance extends Button,TBuilder extends  Pa
 
     TBuilder withCurrentPageText(Function<Integer,Text> textFunction);
 
-    TBuilder withTargetContainer(Pageable container);
-
-    TBuilder withTargetContainer(String targetContainer);
+    TBuilder withTarget(Pageable container);
 
 }

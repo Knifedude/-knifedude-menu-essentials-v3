@@ -1,6 +1,7 @@
 package com.knifedude.menuessentials.api.menu.components.containers.navigation;
 
 import com.knifedude.menuessentials.api.item.models.ItemType;
+import com.knifedude.menuessentials.api.menu.components.containers.item.PageableItemContainer;
 import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.menu.slot.SlotRow;
 import com.knifedude.menuessentials.api.text.models.Text;
@@ -10,9 +11,9 @@ import java.util.function.Supplier;
 
 public interface NavigationBarBuilder {
 
-    NavigationBarBuilder withContainer(SlotRow slots);
+    NavigationBarBuilder withContainer(SlotRow row);
 
-    NavigationBarBuilder withTarget(String targetContainer);
+    NavigationBarBuilder withTarget(PageableItemContainer target);
 
     NavigationBarBuilder withNavigationButton(int index, Text title, ItemType itemType, Collection<SlotComponent> collection);
 

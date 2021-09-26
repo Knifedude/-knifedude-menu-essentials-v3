@@ -12,7 +12,7 @@ public final class Slot implements Taggable {
     private TagCollection tags;
     private InventorySlot inventorySlot;
 
-    public Slot(InventorySlot inventorySlot) {
+    Slot(InventorySlot inventorySlot) {
         this.inventorySlot = inventorySlot;
         this.tags = new TagCollection();
     }
@@ -23,6 +23,10 @@ public final class Slot implements Taggable {
 
     public TagCollection tags() {
         return tags;
+    }
+
+    public int rawIndex() {
+        return inventorySlot.getIndex();
     }
 
     public boolean hasComponent() {

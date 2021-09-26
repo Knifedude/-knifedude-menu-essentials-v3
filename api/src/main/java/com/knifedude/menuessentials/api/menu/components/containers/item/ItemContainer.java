@@ -9,6 +9,7 @@ import com.knifedude.menuessentials.api.menu.slot.SlotContainer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public abstract class ItemContainer<TSlotContainer extends SlotContainer>  {
@@ -17,6 +18,7 @@ public abstract class ItemContainer<TSlotContainer extends SlotContainer>  {
     private final Map<Integer, SlotComponent> components;
     private SlotContainer container;
     private MenuView view;
+    private UUID uniqueId;
 
     public ItemContainer(int width, int height) {
         Preconditions.checkArgument(width >= 1, "Width must be >= 1");
@@ -24,6 +26,11 @@ public abstract class ItemContainer<TSlotContainer extends SlotContainer>  {
         this.width = width;
         this.height = height;
         this.components = Maps.newHashMap();
+        this.uniqueId = UUID.randomUUID();
+    }
+
+    public UUID getUniqueId() {
+        return uniqueId;
     }
 
     public Collection<SlotComponent> getComponents() {

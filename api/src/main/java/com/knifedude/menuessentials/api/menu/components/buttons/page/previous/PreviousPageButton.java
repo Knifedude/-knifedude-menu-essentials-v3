@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
+import com.knifedude.menuessentials.api.menu.ClickContext;
 import com.knifedude.menuessentials.api.menu.components.buttons.page.PageArgs;
 import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
 import com.knifedude.menuessentials.api.menu.components.buttons.page.PageTextTemplate;
@@ -20,6 +21,7 @@ public class PreviousPageButton extends PageButton {
 
     private static final String DEFAULT_PREVIOUS_PAGE_DISPLAYNAME = "Next page";
     private TextTemplate previousPageTemplate;
+
 
     public PreviousPageButton(ItemStack displayItem, ClickHandler... clickHandlers) {
         this(displayItem, Lists.newArrayList(), clickHandlers);
@@ -62,5 +64,12 @@ public class PreviousPageButton extends PageButton {
     @Override
     public void onPageChange(PageChangedEvent event) {
         update();
+    }
+
+    @Override
+    public void onClick(ClickContext context) {
+        super.onClick(context);
+
+
     }
 }
