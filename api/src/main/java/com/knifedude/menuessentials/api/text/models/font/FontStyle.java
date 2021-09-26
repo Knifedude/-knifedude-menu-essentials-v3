@@ -5,5 +5,6 @@ public enum FontStyle {
     ITALIC,
     BOLD,
     UNDERLINE,
-    STRIKETHROUGH
+    STRIKETHROUGH,
+    OBFUSCATED
 }

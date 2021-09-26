@@ -10,12 +10,6 @@ import java.util.List;
 
 public interface Text extends TextElement, Comparable<Text> {
 
-    Iterable<Text> getChildren();
-
-    /**
-     * Gets the text without any formatting
-     * @return The text
-     */
     @Nonnull String getContent();
 
     default boolean isEmpty() {
@@ -28,40 +22,6 @@ public interface Text extends TextElement, Comparable<Text> {
         return concat(Text.of(other));
     }
 
-
-    default Builder toBuilder() {
-        return Text.builder()
-                .content(getContent())
-                .color(getColor())
-                .style(getStyle());
-    }
-
-    default Text copy() {
-        return toBuilder()
-                   .build();
-    }
-
-    default Text toLowerCase() {
-        return toBuilder()
-                .content(getContent().toLowerCase())
-                .build();
-    }
-
-    default Text toUpperCase() {
-        return toBuilder()
-                .content(getContent().toUpperCase())
-                .build();
-    }
-
-    /**
-     * Compares this text's plaintext lower-cased value to another text's plaintext lowercase value
-     * @param otherText The other text
-     * @return the value {@code 0} if the argument plaintext-lowercase-value is equal to
-     *          this plaintext-lowercase-value; a value less than {@code 0} if this plaintext-lowercase-value
-     *          is lexicographically less than the plaintext-lowercase-value argument; and a
-     *          value greater than {@code 0} if this plaintext-lowercase-value is
-     *          lexicographically greater than the plaintext-lowercase-value argument.
-     */
     @Override
     default int compareTo(Text otherText) {
         return this.getContent().compareTo(otherText.getContent());
@@ -88,11 +48,11 @@ public interface Text extends TextElement, Comparable<Text> {
 
         Builder content(String content);
 
+        Builder content(Text text);
+
         Builder color(FontColor color);
 
         Builder style(FontStyle... styles);
-
-        Builder style(List<FontStyle> styles);
 
         Text build();
 

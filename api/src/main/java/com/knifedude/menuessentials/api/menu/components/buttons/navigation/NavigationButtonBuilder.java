@@ -1,8 +1,7 @@
 package com.knifedude.menuessentials.api.menu.components.buttons.navigation;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Supplier;
-import com.knifedude.menuessentials.api.collection.PageSource;
+import com.knifedude.menuessentials.api.common.models.PageSource;
 import com.knifedude.menuessentials.api.common.register.Register;
 import com.knifedude.menuessentials.api.menu.components.buttons.ButtonBuilder;
 import com.knifedude.menuessentials.api.menu.components.containers.item.PageableItemContainer;

@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
+        <module name="plugin-sponge" />
         <module name="api" />
         <module name="plugin" />
-        <module name="common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

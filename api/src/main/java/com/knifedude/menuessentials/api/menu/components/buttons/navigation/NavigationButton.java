@@ -1,7 +1,7 @@
 package com.knifedude.menuessentials.api.menu.components.buttons.navigation;
 
 import com.google.common.collect.Lists;
-import com.knifedude.menuessentials.api.collection.PageSource;
+import com.knifedude.menuessentials.api.common.models.PageSource;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
 import com.knifedude.menuessentials.api.menu.ClickContext;

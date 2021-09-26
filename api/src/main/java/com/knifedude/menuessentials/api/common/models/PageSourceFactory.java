@@ -1,4 +1,4 @@
-package com.knifedude.menuessentials.api.collection;
+package com.knifedude.menuessentials.api.common.models;
 
 import java.util.Collection;
 

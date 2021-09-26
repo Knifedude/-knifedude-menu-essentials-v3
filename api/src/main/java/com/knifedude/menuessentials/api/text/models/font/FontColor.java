@@ -1,10 +1,10 @@
 package com.knifedude.menuessentials.api.text.models.font;
 
 public enum FontColor {
-
     NONE,
     AQUA,
     BLACK,
+    BLUE,
     DARK_BLUE,
     DARK_GREEN,
     DARK_AQUA,
@@ -13,10 +13,10 @@ public enum FontColor {
     GOLD,
     GRAY,
     DARK_GRAY,
-    BLUE, GREEN,
+    GREEN,
     RED,
     LIGHT_PURPLE,
     YELLOW,
     WHITE,
-
+    RESET
 }

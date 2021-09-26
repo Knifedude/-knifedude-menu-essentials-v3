@@ -1,7 +1,7 @@
 package com.knifedude.menuessentials.api.menu.components.containers.item;
 
 import com.google.common.collect.Maps;
-import com.knifedude.menuessentials.api.collection.PageSource;
+import com.knifedude.menuessentials.api.common.models.PageSource;
 import com.knifedude.menuessentials.api.menu.behaviors.Pageable;
 import com.knifedude.menuessentials.api.menu.components.buttons.page.PageButton;
 import com.knifedude.menuessentials.api.menu.event.events.PageChangedEvent;

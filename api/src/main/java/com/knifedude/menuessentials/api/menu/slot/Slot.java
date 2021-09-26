@@ -1,6 +1,6 @@
 package com.knifedude.menuessentials.api.menu.slot;
 
-import com.knifedude.menuessentials.api.collection.TagCollection;
+import com.knifedude.menuessentials.api.common.models.TagCollection;
 import com.knifedude.menuessentials.api.common.models.Taggable;
 import com.knifedude.menuessentials.api.inventory.model.InventorySlot;
 
