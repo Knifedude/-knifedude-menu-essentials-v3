@@ -1,5 +1,6 @@
 package com.knifedude.menu.essentials.sponge.domain.text;
 
+
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.font.FontColor;
 import com.knifedude.menuessentials.api.text.models.font.FontStyle;
@@ -23,19 +24,22 @@ public class SpongeTextWrapper implements Text {
         return spongeText;
     }
 
+
     @Nonnull
     @Override
     public String getContent() {
-        return spongeText.toPlain();
+        return null;
     }
 
     @Override
     public Text concat(Text other) {
-        SpongeTextWrapper otherSponge = (SpongeTextWrapper) other;
-        return new SpongeTextWrapper(this.spongeText.concat(otherSponge.spongeText));
+        return null;
     }
 
-
+    @Override
+    public Text copy() {
+        return null;
+    }
 
     @Override
     public FontColor getColor() {

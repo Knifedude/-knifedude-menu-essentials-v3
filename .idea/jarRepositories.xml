@@ -12,6 +12,11 @@
       <option name="url" value="http://maven.chingo247.com/private-repositories/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="Local Nexus Releases" />
+      <option name="name" value="Local Nexus Releases" />
+      <option name="url" value="http://chingo247.com:8081/repository/knifedude-private//" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="sponge" />
       <option name="name" value="sponge" />
       <option name="url" value="https://repo.spongepowered.org/maven" />
