@@ -8,7 +8,7 @@ import com.knifedude.menuessentials.api.text.models.font.FontStyle;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public interface Text extends TextElement, Comparable<Text> {
+public interface Text extends Comparable<Text> {
 
     @Nonnull String getContent();
 
@@ -19,6 +19,8 @@ public interface Text extends TextElement, Comparable<Text> {
     Text concat(Text other);
 
     Text copy();
+
+    Text.Builder toBuilder();
 
     default Text concat(String other) {
         return concat(Text.of(other));

@@ -12,6 +12,10 @@ public class SpongeTextBuilderWrapper implements Text.Builder {
         this(org.spongepowered.api.text.Text.builder());
     }
 
+    public SpongeTextBuilderWrapper(org.spongepowered.api.text.Text spongeText) {
+        this(spongeText.toBuilder());
+    }
+
     public SpongeTextBuilderWrapper(org.spongepowered.api.text.Text.Builder spongeBuilder) {
         this.spongeBuilder = spongeBuilder;
     }
@@ -24,7 +28,7 @@ public class SpongeTextBuilderWrapper implements Text.Builder {
 
     @Override
     public Text.Builder content(Text content) {
-        spongeBuilder.append(((SpongeTextWrapper) content).getSpongeText());
+        spongeBuilder.append(((SpongeText) content).getUnderlyingText());
         return this;
     }
 
@@ -42,6 +46,6 @@ public class SpongeTextBuilderWrapper implements Text.Builder {
 
     @Override
     public Text build() {
-        return new SpongeTextWrapper(spongeBuilder.build());
+        return new SpongeText(spongeBuilder.build());
     }
 }
