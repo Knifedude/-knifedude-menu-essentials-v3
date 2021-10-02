@@ -1,14 +1,12 @@
 package com.knifedude.menuessentials.api.menu.slot;
 
-import java.util.List;
+import com.knifedude.menuessentials.api.menu.shapes.Point;
+import com.knifedude.menuessentials.api.menu.shapes.Rectangle;
 
 public class SlotRow extends SlotContainer {
 
-    private List<Slot> slots;
-
-    SlotRow(List<Slot> slots, int width) {
-        super(slots, width, 1);
-        this.slots = slots;
+    SlotRow(SlotContainer container, int width) {
+        super(container, Rectangle.of(Point.of(0,0), Point.of(width, 0)));
     }
 
 }

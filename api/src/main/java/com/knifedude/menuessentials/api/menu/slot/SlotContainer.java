@@ -75,24 +75,14 @@ public class SlotContainer implements Iterable<Slot> {
         if (row < 0) throw new IndexOutOfBoundsException(String.format("Argument 'row' was not within bounds (min: 0 and max:%d)", height()));
         if (row >= height()) throw new IndexOutOfBoundsException(String.format("Argument 'row' was not within bounds (min: 0 and max:%d)", height()));
 
-        int start = row * width();
-        List<Slot> slots = IntStream.range(start, start + width())
-                .mapToObj(this::getSlot)
-                .collect(Collectors.toList());
-
-        return new SlotRow(slots, width);
+        return new SlotRow(this, width);
     }
 
     public SlotColumn getSingleColumn(int column) {
         if (column < 0) throw new IndexOutOfBoundsException(String.format("Argument 'row' was not within bounds (min: 0 and max:%d)", height()));
         if (column >= width()) throw new IndexOutOfBoundsException(String.format("Argument 'row' was not within bounds (min: 0 and max:%d)", height()));
 
-        List<Slot> slots = IntStream.range(0, height())
-                .map(i -> (i * width()) + column)
-                .mapToObj(this::getSlot)
-                .collect(Collectors.toList());
-
-        return new SlotColumn(slots, height);
+        return new SlotColumn(this, height);
     }
 
     public List<SlotColumn> getColumnsInRange(int fromColumnIndex, int toColumnIndex) {

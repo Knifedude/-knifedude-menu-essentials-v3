@@ -18,6 +18,8 @@ public interface Text extends TextElement, Comparable<Text> {
 
     Text concat(Text other);
 
+    Text copy();
+
     default Text concat(String other) {
         return concat(Text.of(other));
     }
