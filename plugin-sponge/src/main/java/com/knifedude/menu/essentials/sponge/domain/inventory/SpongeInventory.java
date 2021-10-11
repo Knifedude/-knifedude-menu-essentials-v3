@@ -43,9 +43,8 @@ public class SpongeInventory implements Inventory {
 
     @Override
     public Optional<InventorySlot> findSlot(int index) {
-        Slot s = spongeInventory.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotIndex.of(index)));
-        s.
-        return Optional.ofNullable(s).map(new SpongeInventorySlot(s));
+        Slot s = spongeInventory.query(SlotIndex.of(index));
+        return Optional.ofNullable(s).map(sl -> new SpongeInventorySlot(this, sl, index));
     }
 
 }

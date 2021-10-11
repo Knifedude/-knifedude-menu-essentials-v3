@@ -1,5 +1,6 @@
 package com.knifedude.menu.essentials.sponge.domain.inventory;
 
+import com.knifedude.menu.essentials.sponge.domain.item.SpongeItemStack;
 import com.knifedude.menuessentials.api.inventory.model.Inventory;
 import com.knifedude.menuessentials.api.inventory.model.InventorySlot;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
@@ -29,7 +30,8 @@ public class SpongeInventorySlot implements InventorySlot {
 
     @Override
     public void setItemStack(ItemStack itemStack) {
-        SpongeItem
+        SpongeItemStack spongeItemStack
+
         this.slot.set(itemStack)
     }
 

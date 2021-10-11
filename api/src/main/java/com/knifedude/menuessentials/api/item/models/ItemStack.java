@@ -35,18 +35,6 @@ public interface ItemStack extends HasDisplayName {
         return builder;
     }
 
-
-
-    void setDisplayName(Text newName);
-
-    void setItemType(ItemType itemType);
-
-    void setQuantity(int quantity);
-
-    void setLore(Lore newLore);
-
-    void setDurability(int durability);
-
     interface Builder {
 
         Builder withItemType(ItemType itemType);

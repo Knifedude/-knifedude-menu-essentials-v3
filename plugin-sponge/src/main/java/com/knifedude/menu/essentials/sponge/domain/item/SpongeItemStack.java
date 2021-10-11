@@ -5,15 +5,21 @@ import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
+import org.spongepowered.api.data.key.Keys;
 
 import java.util.List;
 import java.util.Optional;
 
 public class SpongeItemStack implements ItemStack {
 
-    private
+    private org.spongepowered.api.item.inventory.ItemStack itemStack;
 
     public SpongeItemStack(org.spongepowered.api.item.inventory.ItemStack underlyingItemSack) {
+        this.itemStack = underlyingItemSack;
+    }
+
+    public org.spongepowered.api.item.inventory.ItemStack getItemStack() {
+        return itemStack;
     }
 
     @Override
@@ -23,7 +29,7 @@ public class SpongeItemStack implements ItemStack {
 
     @Override
     public int getQuantity() {
-        return 0;
+        return itemStack.getQuantity();
     }
 
     @Override
@@ -33,7 +39,7 @@ public class SpongeItemStack implements ItemStack {
 
     @Override
     public Lore getLore() {
-        return null;
+        return itemStack.get(Keys.ITEM_LORE).map();
     }
 
     @Override
@@ -43,8 +49,10 @@ public class SpongeItemStack implements ItemStack {
 
     @Override
     public Optional<Integer> getDurability() {
-        return Optional.empty();
+        return itemStack.get(Keys.ITEM_DURABILITY);
     }
+
+
 
 
 }
