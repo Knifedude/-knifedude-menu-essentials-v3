@@ -30,6 +30,7 @@ public class SpongeText implements Text {
     public Text concat(Text other) {
         Preconditions.checkArgument(other instanceof SpongeText, "Unexpected implementation of Text. Expected: SpongeText");
         SpongeText spongeText = (SpongeText) other;
+
         return new SpongeText(this.underlyingText.concat(spongeText.underlyingText));
     }
 
@@ -37,6 +38,8 @@ public class SpongeText implements Text {
     public Text copy() {
         return new SpongeText(underlyingText.toBuilder().build());
     }
+
+
 
     public Text.Builder toBuilder() {
         return new SpongeTextBuilderWrapper(underlyingText);

@@ -39,6 +39,16 @@ public interface Text extends Comparable<Text> {
         return Register.getFactory(TextFactory.class).createWithText(content);
     }
 
+    static Text toStyledText(String text, FontColor color, FontStyle... styles) {
+        return Text.builder()
+                   .content(text)
+                   .color(color)
+                   .style(styles != null ? styles :  new FontStyle[]{})
+                   .build();
+    }
+
+
+
     static Text empty() {
         return Register.getFactory(TextFactory.class).createEmpty();
     }

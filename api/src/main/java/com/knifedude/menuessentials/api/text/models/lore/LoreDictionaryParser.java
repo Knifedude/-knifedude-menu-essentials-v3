@@ -14,7 +14,7 @@ public interface LoreDictionaryParser {
      * @return The parsed {@link LoreDictionary}
      * @throws LoreDictionaryParsingException When unable to parse the {@link Lore} to a {@link LoreDictionary}
      */
-    LoreDictionary parse(Lore lore) throws LoreDictionaryParsingException;
+    LoreDictionary parse(Lore lore);
 
 
 

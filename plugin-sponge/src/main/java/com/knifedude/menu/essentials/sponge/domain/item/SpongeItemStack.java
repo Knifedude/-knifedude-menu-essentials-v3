@@ -7,12 +7,15 @@ import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
 import org.spongepowered.api.data.key.Keys;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SpongeItemStack implements ItemStack {
 
     private org.spongepowered.api.item.inventory.ItemStack itemStack;
+
 
     public SpongeItemStack(org.spongepowered.api.item.inventory.ItemStack underlyingItemSack) {
         this.itemStack = underlyingItemSack;
@@ -39,12 +42,15 @@ public class SpongeItemStack implements ItemStack {
 
     @Override
     public Lore getLore() {
-        return itemStack.get(Keys.ITEM_LORE).map();
+        return itemStack.get(Keys.ITEM_LORE).map(texts -> Lore.from(texts));
     }
 
     @Override
     public List<Enchantment> getEnchantments() {
-        return null;
+        return itemStack.get(Keys.ITEM_ENCHANTMENTS).orElse(new ArrayList<>())
+                        .stream()
+                        .map(SpongeEnchantment::new)
+                        .collect(Collectors.toList());
     }
 
     @Override

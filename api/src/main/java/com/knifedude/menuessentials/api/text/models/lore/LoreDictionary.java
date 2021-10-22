@@ -19,70 +19,9 @@ import java.util.stream.Stream;
  * Category: Default <br/>
  * Price: 100<br/>
  */
-public interface LoreDictionary extends Supplier<Lore> {
+public interface LoreDictionary  {
 
-    /**
-     * Creates a new Lore using the entries of this dictionary
-     * @return The lore
-     */
-    @Override
-    Lore get();
-
-    /**
-     * Creates a new Lore using the entries of this dictionary. Executes the {@link #get()}
-     * @return The lore
-     */
-    default Lore toLore() {
-        return get();
-    }
-
-    /**
-     * Sets the {@link FontFormat} for the value
-     * @param format The {@link FontFormat}
-     */
-    void setKeyFormat(FontFormat format);
-
-    /**
-     * Sets the {@link FontFormat} for the value
-     * @param format The {@link FontFormat}
-     */
-    void setValueFormat(FontFormat format);
-
-    /**
-     * Sets the separator. Default is ':' and using the same {@link FontFormat} as the key
-     * @param separator The separator to be used
-     */
-    void setSeparator(Text separator);
-
-    /**
-     * Adds an entry to this dictionary
-     * @param key The key
-     * @param value The value
-     */
-    void addEntry(String key, String value);
-
-
-
-    /**
-     * Adds an entry to this dictionary
-     * @param key The key
-     * @param value The value
-     */
-    void addEntry(Text key, Text value);
-
-    /**
-     * Adds an entry to this dictionary
-     * @param key The key
-     * @param value The value
-     */
-    void addEntryCustomValue(String key, Text value);
-
-    /**
-     * Adds an entry to this dictionary
-     * @param key The key
-     * @param value The value
-     */
-    void addEntryCustomKey(Text key, String value);
+    Lore toLore();
 
     /**
      * Gets all the entries within this dictionary
@@ -106,7 +45,7 @@ public interface LoreDictionary extends Supplier<Lore> {
      * @return The {@link LoreDictionary}
      * @throws LoreDictionaryParsingException
      */
-    static LoreDictionary from(Lore lore) throws LoreDictionaryParsingException {
+    static LoreDictionary from(Lore lore) {
         return Register.getFactory(LoreDictionaryParser.class).parse(lore);
     }
 
@@ -118,11 +57,13 @@ public interface LoreDictionary extends Supplier<Lore> {
          */
         Text getKey();
 
+        Text toText();
+
         /**
          * Gets the value of this {@link Entry}
          * @return The
          */
-        Text getValue();
+        Optional<Text> getValue();
 
     }
 

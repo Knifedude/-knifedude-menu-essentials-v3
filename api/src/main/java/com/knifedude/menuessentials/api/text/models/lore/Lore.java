@@ -9,17 +9,15 @@ import java.util.List;
 
 public interface Lore {
 
-    void addText(Text text);
-
-    void addLines(Text... line);
-
-    void removeText(Text text);
-
-    void clear();
-
     Lore copy();
 
     List<Text> getLines();
+
+    boolean containsPlain(Text text);
+
+    boolean containsPlain(String text);
+
+    LoreDictionary toDictionary(String separator);
 
     static Lore from(Collection<Text> texts) {
         return Register.getFactory(LoreFactory.class).from(texts);
