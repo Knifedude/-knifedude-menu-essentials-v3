@@ -4,6 +4,7 @@ import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
 import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
+import com.knifedude.menuessentials.api.text.models.lore.Lore;
 
 public interface ButtonBuilder<TInstance extends Button, TBuilder extends ButtonBuilder<TInstance,TBuilder>> {
 
@@ -18,6 +19,10 @@ public interface ButtonBuilder<TInstance extends Button, TBuilder extends Button
     }
 
     TBuilder withOnClick(ClickHandler... clickHandler);
+
+    TBuilder withTags(String... tags);
+
+    TBuilder withLore(Lore lore);
 
     TInstance build();
 

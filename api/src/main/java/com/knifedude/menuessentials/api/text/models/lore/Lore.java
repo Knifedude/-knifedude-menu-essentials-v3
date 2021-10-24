@@ -5,19 +5,17 @@ import com.knifedude.menuessentials.api.text.factories.LoreFactory;
 import com.knifedude.menuessentials.api.text.models.Text;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Stream;
 
-public interface Lore {
+public interface Lore extends Iterable<Text> {
 
     Lore copy();
-
-    List<Text> getLines();
 
     boolean containsPlain(Text text);
 
     boolean containsPlain(String text);
 
-    LoreDictionary toDictionary(String separator);
+    Stream<Text> lines();
 
     static Lore from(Collection<Text> texts) {
         return Register.getFactory(LoreFactory.class).from(texts);
@@ -30,6 +28,7 @@ public interface Lore {
     static Lore empty() {
         return Register.getFactory(LoreFactory.class).empty();
     }
+    
+    
 
-    void concat(Lore originalLore);
 }

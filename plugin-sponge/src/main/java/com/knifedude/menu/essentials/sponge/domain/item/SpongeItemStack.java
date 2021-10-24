@@ -1,5 +1,6 @@
 package com.knifedude.menu.essentials.sponge.domain.item;
 
+import com.knifedude.menu.essentials.sponge.domain.text.SpongeText;
 import com.knifedude.menuessentials.api.item.models.Enchantment;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
@@ -42,7 +43,9 @@ public class SpongeItemStack implements ItemStack {
 
     @Override
     public Lore getLore() {
-        return itemStack.get(Keys.ITEM_LORE).map(texts -> Lore.from(texts));
+        return itemStack.get(Keys.ITEM_LORE)
+                        .map(texts -> Lore.from(texts.stream().map(SpongeText::new).collect(Collectors.toList())))
+                        .orElse(Lore.empty());
     }
 
     @Override

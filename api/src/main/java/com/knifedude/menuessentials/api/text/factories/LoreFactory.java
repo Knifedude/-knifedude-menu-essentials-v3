@@ -13,6 +13,4 @@ public interface LoreFactory {
 
     Lore empty();
 
-    Lore create();
-
 }

@@ -1,31 +1,30 @@
 package com.knifedude.menuessentials.core.text;
 
+import com.google.common.collect.Lists;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
-import com.knifedude.menuessentials.api.text.models.lore.LoreDictionary;
-import com.sun.javafx.UnmodifiableArrayList;
-
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LoreImpl implements Lore {
 
     private List<Text> texts;
 
-    public LoreImpl(List<Text> texts) {
-        this.texts = new ArrayList<>(texts);
+    public LoreImpl(Iterable<Text> texts) {
+        this.texts = Lists.newArrayList(texts);
     }
+
+    public LoreImpl(Text... texts) {
+        this.texts = Lists.newArrayList(texts);
+    }
+
 
     @Override
     public Lore copy() {
         return new LoreImpl(texts.stream().map(Text::copy).collect(Collectors.toList()));
-    }
-
-    @Override
-    public List<Text> getLines() {
-        return Collections.unmodifiableList(texts) ;
     }
 
     @Override
@@ -39,12 +38,12 @@ public class LoreImpl implements Lore {
     }
 
     @Override
-    public LoreDictionary toDictionary(String separator) {
-        return LoreDictionary.from(this);
+    public Stream<Text> lines() {
+        return texts.stream();
     }
 
     @Override
-    public void concat(Lore originalLore) {
-
+    public Iterator<Text> iterator() {
+        return texts.iterator();
     }
 }
