@@ -11,6 +11,8 @@ import com.knifedude.menuessentials.api.menu.event.listeners.PageChangeListener;
 import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.TextTemplate;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +23,7 @@ public abstract class PageButton extends Button implements PageChangeListener {
     private static final String DEFAULT_CURRENT_PAGE_DISPLAYNAME = "Current page";
 
     private Pageable target;
-    private TextTemplate currentPageTemplate;
+    private Function<Integer,Text> currentPageTextFunction;
 
 
 
@@ -37,8 +39,14 @@ public abstract class PageButton extends Button implements PageChangeListener {
         this(ItemStack.of(displayItemType, displayName), tags, clickHandlers);
     }
 
-    public PageButton(ItemStack displayItem, List<String> tags, ClickHandler... clickHandlers) {
+    public PageButton(ItemStack displayItem, Collection<String> tags, ClickHandler... clickHandlers) {
         super(displayItem, tags, clickHandlers);
+
+        this.currentPageTemplate = PageTextTemplate.currentPageTemplate(Text.of(DEFAULT_CURRENT_PAGE_DISPLAYNAME));
+    }
+
+    public PageButton(ItemStack displayItem, Collection<String> tags, Iterable<ClickHandler> handlers) {
+        super(displayItem, tags, handlers);
 
         this.currentPageTemplate = PageTextTemplate.currentPageTemplate(Text.of(DEFAULT_CURRENT_PAGE_DISPLAYNAME));
     }

@@ -1,5 +1,6 @@
 package com.knifedude.menuessentials.api.menu.slot;
 
+import com.google.common.collect.Sets;
 import com.knifedude.menuessentials.api.common.validation.Assert;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
@@ -7,19 +8,25 @@ import com.knifedude.menuessentials.api.menu.MenuComponent;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class SlotComponent extends MenuComponent {
 
     private ItemStack displayItem;
     private Slot menuSlot;
     private boolean isHidden;
+    private Set<String> tags;
 
     public SlotComponent(ItemStack displayItem) {
+        this(displayItem, null);
+
+    }
+
+    public SlotComponent(ItemStack displayItem, Collection<String> tags) {
         Assert.notNull(displayItem, "displayItem");
 
         this.displayItem = displayItem.copy();
+        this.tags = tags != null ? new HashSet<>(tags)  : new HashSet<>();
     }
 
     public SlotComponent(ItemType displayItemType, Text displayName) {

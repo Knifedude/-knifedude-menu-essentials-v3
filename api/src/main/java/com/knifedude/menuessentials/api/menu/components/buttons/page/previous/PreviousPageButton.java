@@ -13,6 +13,7 @@ import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.TextTemplate;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
+import com.knifedude.menuessentials.api.text.models.lore.LoreBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -51,12 +52,10 @@ public class PreviousPageButton extends PageButton {
 
     @Override
     protected final void update() {
-        Lore lore = getLore();
-        lore.clear();
-
-        Text currentPageText = createCurrentPageText();
-        Text previousPageText = createPreviousPageText();
-        lore.addLines(currentPageText, previousPageText);
+        Lore lore = LoreBuilder.builder()
+                .addLine(createCurrentPageText())
+                .addLine(createPreviousPageText())
+                .build();
 
         setDisplayLore(lore);
     }

@@ -12,6 +12,9 @@ import com.knifedude.menuessentials.api.menu.handlers.ClickHandler;
 import com.knifedude.menuessentials.api.text.models.Text;
 import com.knifedude.menuessentials.api.text.models.TextTemplate;
 import com.knifedude.menuessentials.api.text.models.lore.Lore;
+import com.knifedude.menuessentials.api.text.models.lore.LoreBuilder;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +34,18 @@ public class NextPageButton extends PageButton {
     public NextPageButton(ItemType displayItemType, Text displayName, List<String> tags, ClickHandler... clickHandlers) {
         this(ItemStack.of(displayItemType, displayName), tags, clickHandlers);
 
+    }
+
+    public NextPageButton(ItemStack displayItem, Collection<String> tags, ClickHandler... clickHandlers) {
+        super(displayItem, tags, clickHandlers);
+
         this.nextPageTemplate = PageTextTemplate.nextPageTemplate(Text.of(DEFAULT_NEXT_PAGE_DISPLAYNAME));
     }
 
-    public NextPageButton(ItemStack displayItem, List<String> tags, ClickHandler... clickHandlers) {
+    public NextPageButton(ItemStack displayItem, Collection<String> tags, Iterable<ClickHandler> clickHandlers) {
         super(displayItem, tags, clickHandlers);
+
+        this.nextPageTemplate = PageTextTemplate.nextPageTemplate(Text.of(DEFAULT_NEXT_PAGE_DISPLAYNAME));
     }
 
     protected final Text createNextPageText() {
@@ -48,12 +58,10 @@ public class NextPageButton extends PageButton {
 
     @Override
     protected final void update() {
-        Lore lore = getLore();
-        lore.clear();
-
-        Text currentPageText = createCurrentPageText();
-        Text nextPageText = createNextPageText();
-        lore.addLines(currentPageText, nextPageText);
+        Lore lore = LoreBuilder.builder()
+                .addLine(createCurrentPageText())
+                .addLine(createNextPageText())
+                .build();
 
         setDisplayLore(lore);
     }

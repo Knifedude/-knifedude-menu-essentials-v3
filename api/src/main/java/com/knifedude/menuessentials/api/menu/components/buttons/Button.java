@@ -1,6 +1,7 @@
 package com.knifedude.menuessentials.api.menu.components.buttons;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.knifedude.menuessentials.api.common.models.Clickable;
 import com.knifedude.menuessentials.api.item.models.ItemStack;
 import com.knifedude.menuessentials.api.item.models.ItemType;
@@ -10,6 +11,7 @@ import com.knifedude.menuessentials.api.menu.slot.SlotComponent;
 import com.knifedude.menuessentials.api.text.models.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Button extends SlotComponent implements Clickable {
@@ -17,28 +19,36 @@ public class Button extends SlotComponent implements Clickable {
     private List<ClickHandler> onClickHandlers;
 
     public Button(ItemStack displayItem, ClickHandler... clickHandlers) {
-        super(displayItem);
-
-        this.onClickHandlers = clickHandlers != null ? Arrays.asList(clickHandlers) : new ArrayList<>();
+        this(displayItem, Lists.newArrayList(), clickHandlers);
     }
 
     public Button(ItemType displayItemType, Text displayName, ClickHandler... clickHandlers) {
-        super(displayItemType, displayName);
-
-        this.onClickHandlers = clickHandlers != null ? Arrays.asList(clickHandlers) : new ArrayList<>();
+        this(displayItemType, displayName, Lists.newArrayList(), clickHandlers);
     }
 
-    public Button(ItemStack displayItem, List<String> tags, ClickHandler... clickHandlers) {
-        this(displayItem, clickHandlers);
+    public Button(ItemType displayItemType, Text displayName, Collection<String>  tags, ClickHandler... clickHandlers) {
+        this(ItemStack.of(displayItemType, displayName), tags, clickHandlers);
 
-        this.tags().addAll(tags);
     }
 
-    public Button(ItemType displayItemType, Text displayName, List<String>  tags, ClickHandler... clickHandlers) {
-        this(displayItemType, displayName, clickHandlers);
+    public Button(ItemStack displayItem, Collection<String> tags, ClickHandler... clickHandlers) {
+        super(displayItem, tags);
 
-        this.tags().addAll(tags);
+        if (clickHandlers != null) {
+            this.onClickHandlers = Lists.newArrayList(clickHandlers);
+        }
     }
+
+    public Button(ItemStack displayItem, Collection<String> tags, Iterable<ClickHandler> clickHandlers) {
+        super(displayItem, tags);
+
+        if (clickHandlers != null) {
+            this.onClickHandlers = Lists.newArrayList(clickHandlers);
+        }
+    }
+
+
+
 
     public void addOnClick(ClickHandler clickHandler) {
         Preconditions.checkNotNull(clickHandler, "Argument 'clickHandler' can't be null");
